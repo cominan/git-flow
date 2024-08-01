@@ -35,6 +35,7 @@ function Table2() {
   const [dataSource, setDataSource] = useState<readonly DataSourceType[]>(
     () => defaultData
   );
+console.log('alooooooooooo git flowa');
 
   const columns: ProColumns<DataSourceType>[] = [
     {
