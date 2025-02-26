@@ -21,8 +21,8 @@ type DataSourceType = {
 const defaultData: DataSourceType[] = new Array(5).fill(1).map((_, index) => {
   return {
     id: (Date.now() + index).toString(),
-    title: index,
-    state: index,
+    title: Math.ceil(Math.random()*10),
+    state: Math.ceil(Math.random()*10),
     created_at: 1590486176000,
   };
 });
@@ -35,35 +35,13 @@ function Table2() {
   const [dataSource, setDataSource] = useState<readonly DataSourceType[]>(
     () => defaultData
   );
+console.log('alooooooooooo git flowa');
 
   const columns: ProColumns<DataSourceType>[] = [
     {
       title: 'ID',
       dataIndex: 'title',
       width: '30%',
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            whitespace: true,
-            message: '此项是必填项',
-          },
-          {
-            message: '必须包含数字',
-            pattern: /[0-9]/,
-          },
-          {
-            max: 16,
-            whitespace: true,
-            message: '最长为 16 位',
-          },
-          {
-            min: 6,
-            whitespace: true,
-            message: '最小为 6 位',
-          },
-        ],
-      },
     },
     {
       title: 'STATE',
@@ -76,20 +54,8 @@ function Table2() {
       editable: false,
       dataIndex: 'desc',
       width: '30%',
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            whitespace: true,
-            message: '此项是必填项',
-          },
-        ], 
-      },
-      fieldProps: {
-        placeholder: 'dsfds',
-      },
       render: (dom, entity) => {
-        return <a>{(entity.state as number) * (entity.title as number) + Number(valueTable1)}</a>;
+        return <a>{Number((entity.state as number) * (entity.title as number) + Number(valueTable1)).toLocaleString()}</a>;
       },
       dependencies: ['state', 'title',valueTable1],
     },
